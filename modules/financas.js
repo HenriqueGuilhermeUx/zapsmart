@@ -1,3 +1,4 @@
+const { obterNoticias } = require('./services/noticias');
 const axios = require('axios');
 
 async function getFinancas() {
