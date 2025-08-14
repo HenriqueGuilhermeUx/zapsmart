@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-async function menu() {
+async function getFinancas() {
   try {
     const dolarRes = await axios.get('https://economia.awesomeapi.com.br/json/last/USD-BRL');
     const dolar = parseFloat(dolarRes.data.USDBRL.bid).toFixed(2);
@@ -9,13 +9,21 @@ async function menu() {
     const bitcoin = criptoRes.data.bitcoin.brl.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     const ethereum = criptoRes.data.ethereum.brl.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
-    const acoes = 'Petrobras: R$28, Vale: R$65 (dados simulados)';
+    const ouro = 'R$ 360,00/g (simulado)';
+    const acoes = 'Petrobras: R$28, Vale: R$65 (simulado)';
 
-    return `💰 Finanças:\n\n💵 Dólar: R$${dolar}\n₿ Bitcoin: ${bitcoin}\nΞ Ethereum: ${ethereum}\n📈 Ações: ${acoes}`;
+    return { dolar, bitcoin, ethereum, ouro, acoes };
   } catch (err) {
-    console.error(err);
-    return 'Erro ao buscar dados financeiros.';
+    console.error('Erro ao buscar dados financeiros:', err.message);
+    return {
+      dolar: 'Erro',
+      bitcoin: 'Erro',
+      ethereum: 'Erro',
+      ouro: 'Erro',
+      acoes: 'Erro'
+    };
   }
 }
 
-module.exports = { menu };
+module.exports = { getFinancas };
+
