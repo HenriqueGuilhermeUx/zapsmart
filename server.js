@@ -1,5 +1,5 @@
 const express = require('express');
-const { getFinancas } = require('./services/financas');
+const { getFinancas } = require('./modules/financas');
 const { getNoticias } = require('./services/noticias');
 
 const app = express();
